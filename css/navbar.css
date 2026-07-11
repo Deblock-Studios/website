@@ -2,7 +2,7 @@
    DEBLOCK STUDIOS — navbar.css
    ════════════════════════════════════════════════ */
 
-nav {
+#navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
@@ -10,92 +10,85 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0 48px;
-  height: 68px;
+  height: 62px;
   background: transparent;
-  transition: background .4s, backdrop-filter .4s, box-shadow .4s;
+  transition: background .3s, border-color .3s;
+  border-bottom: 1px solid transparent;
 }
-nav.scrolled {
-  background: rgba(7,7,15,.88);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 1px 0 var(--border);
+#navbar.scrolled {
+  background: rgba(17,17,17,.92);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
 }
 
 /* Logo */
 .nav-logo {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: 1.3rem;
-  letter-spacing: .08em;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: .04em;
   color: #fff;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
-.nav-logo .logo-bracket { color: var(--lilac); }
+.nav-logo .logo-bracket { color: var(--accent); }
 
 /* Links */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 32px;
   list-style: none;
 }
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
-  font-size: .88rem;
+  font-size: .85rem;
   font-weight: 500;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  transition: color .2s;
+  transition: color .15s;
 }
 .nav-links a:hover { color: #fff; }
 
-/* CTA button inside nav */
+/* CTA */
 .nav-cta {
-  background: var(--violet) !important;
+  background: var(--accent) !important;
   color: #fff !important;
-  padding: 8px 22px;
-  border-radius: 6px;
-  transition: background .2s, box-shadow .2s !important;
-  text-transform: none !important;
+  padding: 7px 18px;
+  border-radius: 5px;
+  font-size: .82rem !important;
+  font-weight: 600 !important;
+  transition: opacity .15s !important;
 }
-.nav-cta:hover {
-  background: var(--lilac) !important;
-  box-shadow: 0 0 20px var(--glow);
-  color: #fff !important;
-}
+.nav-cta:hover { opacity: .85; color: #fff !important; }
 
 /* Language switcher */
 .lang-switcher {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-left: 12px;
+  gap: 2px;
+  margin-left: 8px;
 }
 .lang-btn {
   background: transparent;
-  border: 1.5px solid transparent;
+  border: 1px solid transparent;
   color: var(--muted);
   font-family: 'Inter', sans-serif;
-  font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  padding: 4px 9px;
-  border-radius: 5px;
+  font-size: .75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: color .2s, border-color .2s;
-  text-transform: uppercase;
+  transition: color .15s, border-color .15s;
 }
-.lang-btn:hover { color: #fff; border-color: var(--border); }
+.lang-btn:hover { color: #fff; }
 .lang-btn.active {
-  color: var(--lilac);
-  border-color: var(--lilac);
+  color: var(--accent);
+  border-color: rgba(249,115,22,.35);
 }
 .lang-sep {
   color: var(--border);
-  font-size: .85rem;
+  font-size: .8rem;
   user-select: none;
 }
 
@@ -110,41 +103,37 @@ nav.scrolled {
   border: none;
 }
 .nav-hamburger span {
-  width: 24px; height: 2px;
+  width: 22px; height: 1.5px;
   background: var(--text);
   border-radius: 2px;
-  transition: transform .3s, opacity .3s;
+  transition: transform .25s, opacity .25s;
 }
 
 /* Mobile drawer */
 .nav-drawer {
   display: none;
   position: fixed;
-  top: 68px; left: 0; right: 0;
-  background: rgba(7,7,15,.97);
-  backdrop-filter: blur(20px);
+  top: 62px; left: 0; right: 0;
+  background: rgba(17,17,17,.97);
   border-bottom: 1px solid var(--border);
-  padding: 24px 48px 32px;
+  padding: 20px 48px 28px;
   z-index: 99;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 .nav-drawer.open { display: flex; }
 .nav-drawer a {
   color: var(--muted);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: .95rem;
   font-weight: 500;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  transition: color .2s;
-  padding: 4px 0;
+  transition: color .15s;
+  padding: 3px 0;
 }
 .nav-drawer a:hover { color: #fff; }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  nav { padding: 0 24px; }
+@media (max-width: 860px) {
+  #navbar { padding: 0 24px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
 }

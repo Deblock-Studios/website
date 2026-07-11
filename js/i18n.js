@@ -90,11 +90,6 @@ const TRANSLATIONS = {
     "footer.made": "Fait avec ❤️ par des passionnés",
   },
 
- /* ════════════════════════════════════════════════
-   ENGLISH VERSION
-   ════════════════════════════════════════════════ */
-
-const TRANSLATIONS = {
   en: {
     /* ── Meta ── */
     "meta.description": "Deblock Studios — Independent video game development studio. Discover our projects: MultiCraft Info, MultiDB, and Wildium.",
@@ -179,5 +174,47 @@ const TRANSLATIONS = {
     "footer.cgu": "Terms of Service",
     "footer.copy": "© 2026 Deblock Studios — All rights reserved",
     "footer.made": "Made with ❤️ by enthusiasts",
+  },
+};
+
+/* ════════════════════════════════════════════════
+   i18n controller
+   ════════════════════════════════════════════════ */
+const i18n = {
+  currentLang: 'fr',
+
+  init() {
+    const saved = localStorage.getItem('ds-lang') || 'fr';
+    this.setLang(saved);
+  },
+
+  setLang(lang) {
+    if (!TRANSLATIONS[lang]) return;
+    this.currentLang = lang;
+    localStorage.setItem('ds-lang', lang);
+
+    /* Update all data-i18n elements */
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const text = TRANSLATIONS[lang][key];
+      if (text !== undefined) el.textContent = text;
+    });
+
+    /* Update <html lang> */
+    document.documentElement.lang = lang;
+
+    /* Update active button state */
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    /* Update meta description */
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && TRANSLATIONS[lang]['meta.description']) {
+      metaDesc.setAttribute('content', TRANSLATIONS[lang]['meta.description']);
+    }
+
+    /* Notify other scripts */
+    if (typeof window.restartTyping === 'function') window.restartTyping();
   },
 };

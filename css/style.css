@@ -16,6 +16,47 @@
 
 html { scroll-behavior: smooth; }
 
+/* ── Halos orange animés (toutes les pages) ── */
+.halo-a,
+.halo-b {
+  position: fixed;
+  width: 70vw;
+  height: 70vw;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(120px);
+  opacity: .11;
+  background: #f97316;
+  will-change: transform;
+}
+
+.halo-a {
+  top: -20vw;
+  left: -15vw;
+  animation: halo-a 22s ease-in-out infinite alternate;
+}
+
+.halo-b {
+  bottom: -20vw;
+  right: -15vw;
+  animation: halo-b 28s ease-in-out infinite alternate;
+}
+
+@keyframes halo-a {
+  0%   { transform: translate(0,     0);    }
+  30%  { transform: translate(55vw,  30vh); }
+  60%  { transform: translate(25vw,  70vh); }
+  100% { transform: translate(65vw,  15vh); }
+}
+
+@keyframes halo-b {
+  0%   { transform: translate(0,      0);    }
+  35%  { transform: translate(-60vw, -25vh); }
+  65%  { transform: translate(-20vw, -65vh); }
+  100% { transform: translate(-55vw, -10vh); }
+}
+
 body {
   background: var(--bg);
   color: var(--text);

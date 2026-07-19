@@ -1,3 +1,6 @@
+/* ── Ensure sections sit above animated halo ── */
+#hero, #projects, #about, footer { position: relative; z-index: 1; }
+
 /* ══════════ HERO ══════════ */
 #hero {
   min-height: 100vh;

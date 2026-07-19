@@ -89,6 +89,8 @@ const TRANSLATIONS = {
     "footer.cgu": "CGU",
     "footer.copy": "© 2026 Deblock Studios — Tous droits réservés",
     "footer.made": "Fait avec ❤️ par des passionnés",
+    "footer.blog": "Blog",
+    "footer.github": "GitHub",
 
     /* ── Wildium page ── */
     "wildium.meta.desc": "Wildium — Serveur Luanti PvP Faction. Formez des alliances, affrontez vos ennemis, construisez votre empire.",
@@ -223,6 +225,8 @@ const TRANSLATIONS = {
     "footer.cgu": "Terms of Service",
     "footer.copy": "© 2026 Deblock Studios — All rights reserved",
     "footer.made": "Made with ❤️ by enthusiasts",
+   "footer.blog": "Blog",
+    "footer.github": "GitHub",
 
     /* ── Wildium page ── */
     "wildium.meta.desc": "Wildium — Luanti PvP Faction server. Form alliances, face your enemies, build your empire.",

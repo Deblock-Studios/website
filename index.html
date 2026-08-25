@@ -3,213 +3,275 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Deblock Studios — développement de sites web et serveurs Luanti à but non lucratif." />
-  <meta name="google-site-verification" content="StuE6oomFtFn4pFJ5taW9_EfONIFjCqAtrxFwFtbaLA" /> 
-  <title>Deblock Studios</title>
+  <meta name="description" data-i18n="meta.description" content="Deblock Studios, collectif indépendant qui conçoit des sites web, des serveurs Luanti et des outils de jeu — gratuits, rapides et sans publicité." />
+  <meta name="google-site-verification" content="StuE6oomFtFn4pFJ5taW9_EfONIFjCqAtrxFwFtbaLA" />
+  <title data-i18n-title="meta.title">Deblock Studios — On forge des mondes</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
-  <link rel="stylesheet" href="css/sections.css" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-<div class="halo-a" aria-hidden="true"></div>
-<div class="halo-b" aria-hidden="true"></div>
 
+  <div class="noise" aria-hidden="true"></div>
 
-<!-- NAVBAR -->
-<nav id="navbar">
-  <a href="#" class="nav-logo">
-    <span class="logo-bracket">[</span>DEBLOCK<span class="logo-bracket">]</span>
-  </a>
+  <!-- NAVBAR -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+      <img class="brand-logo" src="images/logo-deblock.svg" alt="Deblock Studios" />
+    </a>
 
-  <ul class="nav-links">
-    <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
-    <li><a href="#about"    data-i18n="nav.studio">Studio</a></li>
-    <li><a href="#footer"   data-i18n="nav.contact">Contact</a></li>
-    <li><a href="https://blog-deblock-studios.vercel.app" data-i18n="nav.blog">Blog</a></li>
-    <li><a href="#projects" class="nav-cta" data-i18n="nav.cta">Nos projets</a></li>
-    <li class="lang-switcher">
+    <ul class="nav-links">
+      <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
+      <li><a href="#about" data-i18n="nav.studio">Studio</a></li>
+      <li><a href="#footer" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="https://blog-deblock-studios.vercel.app" data-i18n="nav.blog">Blog</a></li>
+      <li class="lang-switcher">
+        <button class="lang-btn active" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </li>
+    </ul>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- DRAWER -->
+  <div class="drawer" id="drawer">
+    <a href="#projects" data-i18n="nav.projects">Projets</a>
+    <a href="#about" data-i18n="nav.studio">Studio</a>
+    <a href="#footer" data-i18n="nav.contact">Contact</a>
+    <a href="https://blog-deblock-studios.vercel.app" data-i18n="nav.blog">Blog</a>
+    <div class="lang-switcher">
       <button class="lang-btn active" data-lang="fr">FR</button>
-      <span class="lang-sep">|</span>
       <button class="lang-btn" data-lang="en">EN</button>
-    </li>
-  </ul>
-
-  <button class="nav-hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<nav class="nav-drawer" id="nav-drawer">
-  <a href="#projects" data-i18n="nav.projects">Projets</a>
-  <a href="#about"    data-i18n="nav.studio">Studio</a>
-  <a href="#footer"   data-i18n="nav.contact">Contact</a>
-  <div class="lang-switcher" style="margin-top:6px;">
-    <button class="lang-btn active" data-lang="fr">FR</button>
-    <span class="lang-sep">|</span>
-    <button class="lang-btn" data-lang="en">EN</button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-content reveal">
-
-    <h1 class="hero-title">
-      <span data-i18n="hero.title.line1">Forger des</span><br />
-      <span class="highlight" data-i18n="hero.title.highlight">univers numériques</span><br />
-      <span data-i18n="hero.title.line3">inoubliables.</span>
-    </h1>
-
-    <p class="hero-sub" data-i18n="hero.sub">
-      Deblock Studios conçoit des sites internet et serveurs en visant à vous proposer la meilleur expérience.
-    </p>
-
-    <div class="hero-actions">
-      <a href="#projects" class="btn-primary">
-        <span data-i18n="hero.cta.primary">Découvrir nos projets</span>
-      </a>
-      <a href="#about" class="btn-ghost">
-        <span data-i18n="hero.cta.ghost">Nous</span>
-      </a>
     </div>
   </div>
-</section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-head reveal">
-    <h2 class="section-title" data-i18n="projects.title">Nos Projets</h2>
-    <p class="section-sub" data-i18n="projects.sub">Voici toutes nos créations, proposées gratuitement et sans publicité.</p>
-  </div>
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <span class="eyebrow" data-i18n="hero.eyebrow">Studio indépendant — jeux &amp; web</span>
 
-  <div class="projects-grid">
+      <h1 class="hero-title">
+        <span class="l1" data-i18n="hero.title.line1">On forge</span><br />
+        <span class="l2 grad" data-i18n="hero.title.line2">des mondes</span><br />
+        <span class="l3" data-i18n="hero.title.line3">qui restent.</span>
+      </h1>
 
-    <article class="project-card reveal reveal-delay-1">
-      <div class="project-img-wrap">
-        <img src="https://deblock-studios.vercel.app/images/multicraft-info.png" alt="MultiCraft Info" loading="lazy" />
-        <span class="project-tag" data-i18n="project.mci.tag">Site web</span>
-      </div>
-      <div class="project-body">
-        <h3 class="project-name" data-i18n="project.mci.name">MultiCraft Info</h3>
-        <p class="project-desc" data-i18n="project.mci.desc">MultiCraft Info est un site web de référence pour le jeu MultiCraft. Consultez la liste des serveurs, laissez vos avis, discutez avec la communauté, consultez les mises à jour du jeu...
-        </p>
-        <a href="https://multicraft-info.netlify.app" class="project-link">
-          <span data-i18n="project.link">Explorer le projet</span>
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-      </div>
-    </article>
-
-    <article class="project-card reveal reveal-delay-2">
-      <div class="project-img-wrap">
-        <img src="https://deblock-studios.vercel.app/images/multidb.png" alt="MultiDB" loading="lazy" />
-        <span class="project-tag" data-i18n="project.mdb.tag">Site web</span>
-      </div>
-      <div class="project-body">
-        <h3 class="project-name" data-i18n="project.mdb.name">MultiDB</h3>
-        <p class="project-desc" data-i18n="project.mdb.desc">Explorez et téléchargez gratuitements des mods et packs de texture pour enrichir votre gameplay sur MultiCraft.
-        </p>
-        <a href="https://multidb.vercel.app" class="project-link">
-          <span data-i18n="project.link">Explorer le projet</span>
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-      </div>
-    </article>
-
-    <article class="project-card reveal reveal-delay-3">
-      <div class="project-img-wrap">
-        <img src="https://deblock-studios.vercel.app/images/Wildium.png" alt="Wildium" loading="lazy" />
-        <span class="project-tag" data-i18n="project.wld.tag">Serveur Luanti</span>
-      </div>
-      <div class="project-body">
-        <h3 class="project-name" data-i18n="project.wld.name">Wildium</h3>
-        <p class="project-desc" data-i18n="project.wld.desc">
-          Serveur Luanti PvP Faction où seuls les plus stratèges survivent. Formez des alliances, affrontez vos ennemis, construisez votre empire dans un monde en perpétuelle guerre.
-        </p>
-        <a href="wildium.html" class="project-link">
-          <span data-i18n="project.link">Explorer le projet</span>
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-inner">
-    <div class="about-text reveal">
-      <h2 data-i18n="about.title">Un studio bâti sur la passion du jeu</h2>
-      <p data-i18n="about.p1">
-        Deblock Studios est un studio indépendant créé par des passionnés de jeux vidéo qui en avaient assez d'attendre que quelqu'un d'autre construise les outils dont la communauté avait besoin.
+      <p class="hero-sub" data-i18n="hero.sub">
+        Deblock Studios, c'est un collectif de passionnés qui conçoit des sites web, des serveurs et des outils pour la communauté — gratuits, rapides, et sans la moindre publicité.
       </p>
-      <p data-i18n="about.p2">
-        Chaque projet est pensé pour être gratuit, accessible et entretenu par une vraie communauté. Pas de paywall, pas de fioritures : juste du jeu, bien fait.
-      </p>
-      <a href="#projects" class="btn-primary">
-        <span data-i18n="about.cta">Voir tous nos projets</span>
-      </a>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <span data-i18n="hero.cta.primary">Explorer nos créations</span>
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#about" class="btn btn-ghost">
+          <span data-i18n="hero.cta.ghost">Le studio</span>
+        </a>
+      </div>
     </div>
 
-    <div class="about-features reveal reveal-delay-1">
-      <div class="about-feat">
-        <h4 data-i18n="feat.gaming.title">Gaming First</h4>
-        <p data-i18n="feat.gaming.desc">Chaque décision de design est guidée par l'expérience joueur.</p>
-      </div>
-      <div class="about-feat">
-        <h4 data-i18n="feat.opensource.title">Open Source</h4>
-        <p data-i18n="feat.opensource.desc">Nos projets sont ouverts et contributifs par nature.</p>
-      </div>
-      <div class="about-feat">
-        <h4 data-i18n="feat.perf.title">Performance</h4>
-        <p data-i18n="feat.perf.desc">Sites légers et serveurs optimisés pour zéro latence.</p>
-      </div>
-      <div class="about-feat">
-        <h4 data-i18n="feat.community.title">Communauté</h4>
-        <p data-i18n="feat.community.desc">Construits avec les joueurs, pour les joueurs.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <a href="#projects" class="scroll-hint" aria-label="Scroll">
+      <span class="mouse"></span>
+      <span data-i18n="hero.scroll">Défiler</span>
+    </a>
+  </header>
 
-<!-- FOOTER -->
-<footer id="footer">
-  <div class="footer-top reveal">
-    <div class="footer-col">
-      <h5 data-i18n="footer.col.projects">Projets</h5>
-      <ul>
-        <li><a href="https://multicraft-info.netlify.app">MultiCraft Info</a></li>
-        <li><a href="https://multidb.vercel.app">MultiDB</a></li>
-        <li><a href="wildium.html">Wildium</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h5 data-i18n="footer.col.studio">Studio</h5>
-      <ul>
-        <li><a href="https://deblock-studios.vercel.app/#about" data-i18n="footer.about">À propos</a></li>
-        <li><a href="mailto:creatif.france@outlook.com" data-i18n="footer.contact">Contact</a></li>
-        <li><a href="https://deblock-studios.vercel.app/legal.html" data-i18n="footer.legal">Mentions légales</a></li>
-        <li><a href="https://blog-deblock-studios.vercel.app/" data-i18n="footer.blog">Blog</a></li>
-        <li><a href="https://github.com/Deblock-Studios" data-i18n="footer.github">Github</a></li>
-      </ul>
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-group"><span class="mi" data-i18n="marquee.1">Sites web</span><em>✦</em><span class="mi" data-i18n="marquee.2">Serveurs Luanti</span><em>✦</em><span class="mi" data-i18n="marquee.3">Mods</span><em>✦</em><span class="mi" data-i18n="marquee.4">PvP Faction</span><em>✦</em><span class="mi" data-i18n="marquee.5">Sans tracking</span><em>✦</em><span class="mi" data-i18n="marquee.6">100% gratuit</span><em>✦</em></span>
+      <span class="marquee-group" aria-hidden="true"><span class="mi" data-i18n="marquee.1">Sites web</span><em>✦</em><span class="mi" data-i18n="marquee.2">Serveurs Luanti</span><em>✦</em><span class="mi" data-i18n="marquee.3">Mods</span><em>✦</em><span class="mi" data-i18n="marquee.4">PvP Faction</span><em>✦</em><span class="mi" data-i18n="marquee.5">Sans tracking</span><em>✦</em><span class="mi" data-i18n="marquee.6">100% gratuit</span><em>✦</em></span>
     </div>
   </div>
 
-  <div class="footer-bottom">
-    <span data-i18n="footer.copy">© 2026 Deblock Studios — Tous droits réservés</span>
-    <span data-i18n="footer.made">Fait avec ❤️ par des passionnés</span>
-  </div>
-</footer>
+  <!-- STATS -->
+  <section class="section">
+    <div class="stats reveal">
+      <div class="stat">
+        <b data-i18n="stat.1.val">3</b>
+        <span data-i18n="stat.1.label">Projets actifs</span>
+      </div>
+      <div class="stat">
+        <b data-i18n="stat.2.val">100%</b>
+        <span data-i18n="stat.2.label">Gratuit</span>
+      </div>
+      <div class="stat">
+        <b data-i18n="stat.3.val">0€</b>
+        <span data-i18n="stat.3.label">De publicité</span>
+      </div>
+      <div class="stat">
+        <b data-i18n="stat.4.val">24/7</b>
+        <span data-i18n="stat.4.label">En ligne</span>
+      </div>
+    </div>
+  </section>
 
-<script src="js/i18n.js"></script>
-<script src="js/effects.js"></script>
-<script>i18n.init();</script>
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="projects.eyebrow">Ce qu'on construit</span>
+      <h2 data-i18n="projects.title">Nos créations</h2>
+      <p data-i18n="projects.sub">Chaque projet est gratuit, ouvert et pensé pour la communauté. Rien à payer, rien à installer, rien à cacher.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <article class="project-card reveal" data-tilt>
+        <div class="project-media">
+          <img src="images/multicraft-info.png" alt="MultiCraft Info" loading="lazy" />
+        </div>
+        <div class="project-body">
+          <h3 data-i18n="project.mci.name">MultiCraft Info</h3>
+          <p data-i18n="project.mci.desc">Le portail de référence de l'écosystème MultiCraft : listes de serveurs, avis de joueurs, actualités et communauté — tout le jeu au même endroit.</p>
+          <a href="https://multicraft-info.netlify.app" class="project-link">
+            <span data-i18n="project.link">Explorer le projet</span>
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-tilt>
+        <div class="project-media">
+          <img src="images/multidb.png" alt="MultiDB" loading="lazy" />
+        </div>
+        <div class="project-body">
+          <h3 data-i18n="project.mdb.name">MultiDB</h3>
+          <p data-i18n="project.mdb.desc">La bibliothèque communautaire de mods et de packs de texture. Téléchargez, testez, partagez — sans compte, sans pub, sans frais.</p>
+          <a href="https://multidb.vercel.app" class="project-link">
+            <span data-i18n="project.link">Explorer le projet</span>
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-tilt>
+        <div class="project-media">
+          <img src="images/Wildium.png" alt="Wildium" loading="lazy" />
+        </div>
+        <div class="project-body">
+          <h3 data-i18n="project.wld.name">Wildium</h3>
+          <p data-i18n="project.wld.desc">Le serveur Luanti PvP Faction où seuls les stratèges survivent. Alliances, raids et batailles épiques dans un monde en guerre permanente.</p>
+          <a href="wildium.html" class="project-link">
+            <span data-i18n="project.link">Explorer le projet</span>
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- STUDIO / ABOUT -->
+  <section class="section" id="about">
+    <div class="about-grid">
+
+      <div class="about-text reveal">
+        <span class="eyebrow" data-i18n="about.eyebrow">Le studio</span>
+        <h2 data-i18n="about.title">Pas une entreprise. Une bande de joueurs.</h2>
+        <p data-i18n="about.p1">Deblock Studios a pour mission de créer des outils et des serveurs de qualité.</p>
+        <p data-i18n="about.p2">Pas d'outils inutilisables, pas de tracking avancé. Juste des sites et des serveurs de qualité.</p>
+        <a href="#projects" class="btn btn-primary">
+          <span data-i18n="about.cta">Voir toutes nos créations</span>
+        </a>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature reveal">
+          <span class="icon">🎮</span>
+          <h4 data-i18n="feat.1.title">Joueurs d'abord</h4>
+          <p data-i18n="feat.1.desc">Chaque ligne de code part d'une vraie envie de joueur, pas d'un business plan.</p>
+        </div>
+        <div class="feature reveal">
+          <span class="icon">💸</span>
+          <h4 data-i18n="feat.2.title">100% gratuit</h4>
+          <p data-i18n="feat.2.desc">Pas de publicité, pas de données revendues, pas d'abonnement caché.</p>
+        </div>
+        <div class="feature reveal">
+          <span class="icon">🏗️</span>
+          <h4 data-i18n="feat.3.title">Fait pour durer</h4>
+          <p data-i18n="feat.3.desc">Des bases propres, une communauté active, des projets qui évoluent.</p>
+        </div>
+        <div class="feature reveal">
+          <span class="icon">🌐</span>
+          <h4 data-i18n="feat.4.title">Sans tracking</h4>
+          <p data-i18n="feat.4.desc">Des sites et des serveurs clairs, sans collecte avancée de données.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="cta-card reveal">
+      <h2 data-i18n="cta.title">Une idée ? Un serveur à lancer ?</h2>
+      <p data-i18n="cta.desc">On est toujours partants pour un nouveau défi. Écrivez-nous, on en discute autour d'un bon vieux pixel.</p>
+      <div class="hero-actions">
+        <a href="mailto:deblock-studios@proton.me" class="btn btn-primary">
+          <span data-i18n="cta.btn.contact">Nous écrire</span>
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+        </a>
+        <a href="https://github.com/Deblock-Studios" class="btn btn-ghost">
+          <span data-i18n="cta.btn.github">Voir le GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <img class="brand-logo" src="images/logo-deblock.svg" alt="Deblock Studios" />
+        </a>
+        <p data-i18n="footer.brand.desc">Collectif indépendant qui forge des sites, des serveurs et des outils de jeu pour la communauté.</p>
+        <div class="socials">
+          <a href="https://github.com/Deblock-Studios" aria-label="GitHub" target="_blank" rel="noopener">
+            <svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-i18n="footer.col.projects">Projets</h5>
+        <ul>
+          <li><a href="https://multicraft-info.netlify.app">MultiCraft Info</a></li>
+          <li><a href="https://multidb.vercel.app">MultiDB</a></li>
+          <li><a href="wildium.html">Wildium</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-i18n="footer.col.studio">Studio</h5>
+        <ul>
+          <li><a href="#about" data-i18n="footer.about">À propos</a></li>
+          <li><a href="mailto:deblock-studios@proton.me" data-i18n="footer.contact">Contact</a></li>
+          <li><a href="legal.html" data-i18n="footer.legal">Mentions légales</a></li>
+          <li><a href="https://blog-deblock-studios.vercel.app" data-i18n="footer.blog">Blog</a></li>
+          <li><a href="https://github.com/Deblock-Studios" data-i18n="footer.github">GitHub</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footer.copy">© 2026 Deblock Studios — Tous droits réservés</span>
+      <span data-i18n="footer.made">Fait avec passion, sans publicité</span>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script>i18n.init();</script>
 </body>
 </html>

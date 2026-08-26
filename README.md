@@ -16,7 +16,7 @@ Complete redesign and rewrite of the site:
 
 - **3D animations** — Three.js hero backgrounds (floating voxel cubes, rotating wireframe core, particle fields) with mouse parallax and scroll reactivity.
 - **New design system** — deep-space dark theme, glassmorphism cards, gradient accents, custom scrollbar.
-- **New fonts** — Unbounded (display) + Space Grotesk (body).
+- **New fonts** — Press Start 2P (display) + Space Grotesk (body).
 - **New copy** — all texts rewritten, still FR / EN with a language switcher.
 - **Zero build step** — plain HTML / CSS / JS (ES modules), deploys instantly on Vercel as a static site.
 
@@ -30,6 +30,6 @@ Complete redesign and rewrite of the site:
 
 - Vanilla HTML / CSS / JS
 - [Three.js](https://threejs.org/) loaded from CDN via ES module import map
-- Google Fonts (Unbounded, Space Grotesk)
+- Google Fonts (Press Start 2P, Space Grotesk)
 
 ### (C) Deblock Studios 2026

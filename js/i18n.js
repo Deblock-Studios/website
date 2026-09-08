@@ -105,7 +105,7 @@ const TRANSLATIONS = {
     "footer.legal": "Mentions légales",
     "footer.blog": "Blog",
     "footer.github": "GitHub",
-    "footer.copy": "© 2026 Deblock Studios — Tous droits réservés",
+    "footer.copy": "© 2026 Thefire & Lucas76 — Tous droits réservés",
     "footer.made": "Fait avec passion, sans publicité",
 
     /* ── Wildium ── */
@@ -270,7 +270,7 @@ const TRANSLATIONS = {
     "footer.legal": "Legal notices",
     "footer.blog": "Blog",
     "footer.github": "GitHub",
-    "footer.copy": "© 2026 Deblock Studios — All rights reserved",
+    "footer.copy": "© 2026 Thefire & Lucas76 — All rights reserved",
     "footer.made": "Made with passion, without ads",
 
     /* ── Wildium ── */

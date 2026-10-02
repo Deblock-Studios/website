@@ -72,6 +72,9 @@ const TRANSLATIONS = {
     "project.wld.pill3": "Factions",
     "project.wld.pill4": "Arène",
 
+    "project.dc.name": "DeblockCord",
+    "project.dc.desc": "L'alternative de discord mais version Deblock"
+
     "project.link": "Explorer le projet",
 
     /* ── Studio / About ── */
@@ -236,6 +239,9 @@ const TRANSLATIONS = {
     "project.wld.pill2": "PvP",
     "project.wld.pill3": "Factions",
     "project.wld.pill4": "Arena",
+
+    "project.dc.name": "DeblockCord",
+    "project.dc.desc": "The discord alternative but Deblock version",
 
     "project.link": "Explore the project",
 

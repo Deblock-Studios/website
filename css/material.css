@@ -458,7 +458,8 @@ html[data-ui="material"] .m-cluster {
 }
 
 /* The scalloped silhouette is painted on its own background layer:
-   the label above it is never clipped by the polygon. */
+   the label above it is never clipped by the polygon, and only that
+   layer spins, so the petals turn while the numbers stay upright. */
 html[data-ui="material"] .m-shape {
   position: absolute;
   aspect-ratio: 1;
@@ -475,6 +476,9 @@ html[data-ui="material"] .m-shape::before {
   background: var(--m-shape-bg, transparent);
   -webkit-clip-path: var(--m-shape-clip, circle(50%));
   clip-path: var(--m-shape-clip, circle(50%));
+  animation: mSpin var(--m-spin, 60s) linear infinite;
+  animation-direction: var(--m-spin-dir, normal);
+  will-change: transform;
 }
 html[data-ui="material"] .m-shape > span {
   display: block;
@@ -499,10 +503,26 @@ html[data-ui="material"] .m-shape small {
   line-height: 1.15;
   opacity: .85;
 }
-html[data-ui="material"] .m-shape.s-1 { width: 58%; right: 0; top: 0; --m-shape-bg: var(--m-p); color: var(--m-on-p); }
-html[data-ui="material"] .m-shape.s-2 { width: 38%; left: 0; top: 33%; --m-shape-bg: var(--m-tc); color: var(--m-on-tc); }
-html[data-ui="material"] .m-shape.s-3 { width: 33%; right: 4%; bottom: 6%; --m-shape-bg: var(--m-sc); color: var(--m-on-sc); }
-html[data-ui="material"] .m-shape.s-4 { width: 29%; left: 24%; bottom: 0; --m-shape-bg: var(--m-pc); color: var(--m-on-pc); }
+html[data-ui="material"] .m-shape.s-1 {
+  width: 58%; right: 0; top: 0;
+  --m-shape-bg: var(--m-p); color: var(--m-on-p);
+  --m-spin: 64s;
+}
+html[data-ui="material"] .m-shape.s-2 {
+  width: 38%; left: 0; top: 33%;
+  --m-shape-bg: var(--m-tc); color: var(--m-on-tc);
+  --m-spin: 48s; --m-spin-dir: reverse;
+}
+html[data-ui="material"] .m-shape.s-3 {
+  width: 33%; right: 4%; bottom: 6%;
+  --m-shape-bg: var(--m-sc); color: var(--m-on-sc);
+  --m-spin: 56s; --m-spin-dir: reverse;
+}
+html[data-ui="material"] .m-shape.s-4 {
+  width: 29%; left: 24%; bottom: 0;
+  --m-shape-bg: var(--m-pc); color: var(--m-on-pc);
+  --m-spin: 40s;
+}
 html[data-ui="material"] .m-shape.s-3 b,
 html[data-ui="material"] .m-shape.s-4 b { font-size: clamp(18px, 2.1vw, 32px); }
 html[data-ui="material"] .m-shape.s-3 small,

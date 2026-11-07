@@ -1,0 +1,1252 @@
+/* ═══════════════════════════════════════════════════════════
+   DEBLOCK STUDIOS — Material 3 Expressive theme layer
+   Every rule is scoped to html[data-ui="material"], so the
+   classic theme (main.css) is left exactly as it was.
+   Light by default, dark via html[data-mode="dark"].
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Tokens ─────────────────────────────────────────── */
+html[data-ui="material"] {
+  color-scheme: light;
+
+  --m-bg:      #F5FBEF;
+  --m-on-bg:   #171D16;
+  --m-var:     #424940;
+  --m-outline: #72796F;
+
+  --m-p:       #2B6A3A;
+  --m-on-p:    #FFFFFF;
+  --m-pc:      #B2F2B6;
+  --m-on-pc:   #00210B;
+  --m-sc:      #D5E8D2;
+  --m-on-sc:   #101F12;
+  --m-tc:      #FFDCC0;
+  --m-on-tc:   #2C1600;
+  --m-t:       #8A4F10;
+  --m-s1:      #EBF2E5;
+  --m-s2:      #E3EBDD;
+  --m-s3:      #DCE5D6;
+  --m-inv:     #2B322A;
+  --m-on-inv:  #ECF3E5;
+
+  --m-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --m-ease:   cubic-bezier(.2, 0, 0, 1);
+
+  scroll-padding-top: 110px;
+}
+
+html[data-ui="material"][data-mode="dark"] {
+  color-scheme: dark;
+
+  --m-bg:      #10150F;
+  --m-on-bg:   #E0E6D9;
+  --m-var:     #C1C9BE;
+  --m-outline: #8B9389;
+
+  --m-p:       #97D59B;
+  --m-on-p:    #00391A;
+  --m-pc:      #0E5128;
+  --m-on-pc:   #B2F2B6;
+  --m-sc:      #3A4B3A;
+  --m-on-sc:   #D5E8D2;
+  --m-tc:      #6A3A00;
+  --m-on-tc:   #FFDCC0;
+  --m-t:       #FFB77A;
+  --m-s1:      #181E17;
+  --m-s2:      #1D241C;
+  --m-s3:      #262E25;
+  --m-inv:     #E0E6D9;
+  --m-on-inv:  #2B322A;
+}
+
+/* ── Canvas ─────────────────────────────────────────── */
+html[data-ui="material"] body {
+  background: var(--m-bg);
+  color: var(--m-on-bg);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  font-synthesis: weight;
+  transition: background .4s var(--m-ease), color .4s var(--m-ease);
+}
+html[data-ui="material"] body::before { background: none; }
+html[data-ui="material"] .noise { display: none; }
+
+html[data-ui="material"] ::selection { background: var(--m-pc); color: var(--m-on-pc); }
+
+html[data-ui="material"] ::-webkit-scrollbar { width: 10px; }
+html[data-ui="material"] ::-webkit-scrollbar-track { background: var(--m-bg); }
+html[data-ui="material"] ::-webkit-scrollbar-thumb {
+  background: var(--m-outline);
+  border: 3px solid var(--m-bg);
+  border-radius: 10px;
+}
+
+html[data-ui="material"] :focus-visible {
+  outline: 3px solid var(--m-p);
+  outline-offset: 3px;
+}
+
+/* ── Typography: expressive, wide and heavy ─────────── */
+html[data-ui="material"] .hero-title,
+html[data-ui="material"] .section-head h2,
+html[data-ui="material"] .about-text h2,
+html[data-ui="material"] .cta-card h2,
+html[data-ui="material"] .join-card h2,
+html[data-ui="material"] .legal h1,
+html[data-ui="material"] .project-body h3,
+html[data-ui="material"] .feature-card h3,
+html[data-ui="material"] .gameplay-step h3,
+html[data-ui="material"] .feature h4 {
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -.025em;
+  line-height: 1.04;
+  text-transform: none;
+  text-shadow: none;
+  filter: none;
+}
+
+html[data-ui="material"] .grad {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--m-p);
+}
+
+/* Eyebrow → tonal chip */
+html[data-ui="material"] .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: var(--m-sc);
+  color: var(--m-on-sc);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-transform: none;
+}
+html[data-ui="material"] .eyebrow::before,
+html[data-ui="material"] .hero-inner .eyebrow::after { display: none; }
+html[data-ui="material"] .hero-inner .eyebrow { justify-content: flex-start; }
+
+/* ── Buttons: pill that morphs to a squircle ────────── */
+html[data-ui="material"] .btn,
+html[data-ui="material"] .btn-primary,
+html[data-ui="material"] .btn-ghost {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 28px;
+  background: var(--m-sc);
+  color: var(--m-on-sc);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-transform: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  transition:
+    border-radius .35s var(--m-spring),
+    transform .35s var(--m-spring),
+    background-color .25s var(--m-ease),
+    color .25s var(--m-ease);
+}
+html[data-ui="material"] .btn:hover,
+html[data-ui="material"] .btn-primary:hover,
+html[data-ui="material"] .btn-ghost:hover {
+  border: 0;
+  border-radius: 16px;
+  transform: none;
+  box-shadow: none;
+}
+html[data-ui="material"] .btn:active { border-radius: 12px; transform: scale(.96); }
+html[data-ui="material"] .btn svg { width: 20px; height: 20px; transition: transform .25s; }
+html[data-ui="material"] .btn:hover svg { transform: translateX(3px); }
+
+html[data-ui="material"] .btn-primary,
+html[data-ui="material"] .btn-primary:hover {
+  background: var(--m-p);
+  color: var(--m-on-p);
+}
+html[data-ui="material"] .btn-primary:hover {
+  background: color-mix(in srgb, var(--m-p) 88%, var(--m-on-p));
+}
+html[data-ui="material"] .btn-ghost,
+html[data-ui="material"] .btn-ghost:hover {
+  background: var(--m-sc);
+  color: var(--m-on-sc);
+  border: 0;
+}
+html[data-ui="material"] .btn-ghost:hover {
+  background: color-mix(in srgb, var(--m-sc) 84%, var(--m-on-sc));
+}
+
+/* ── Floating navigation bar ────────────────────────── */
+html[data-ui="material"] .nav {
+  top: calc(env(safe-area-inset-top, 0px) + 14px);
+  left: 0;
+  right: 0;
+  height: auto;
+  width: calc(100% - clamp(32px, 8vw, 80px));
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 8px 8px 8px 22px;
+  border: 0;
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--m-s2) 82%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .05);
+  transition: background .35s, border-radius .35s, box-shadow .35s;
+}
+html[data-ui="material"] .nav.scrolled {
+  background: color-mix(in srgb, var(--m-s2) 94%, transparent);
+  border: 0;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, .08);
+}
+
+html[data-ui="material"] .nav-logo { color: var(--m-on-bg); }
+
+/* The logo is drawn in light grey for the dark classic theme:
+   on the light Material canvas it sits on a dark tile instead. */
+html[data-ui="material"][data-mode="light"] .brand-logo {
+  padding: 4px;
+  border-radius: 12px;
+  background: #2B322A;
+}
+
+html[data-ui="material"] .nav-links { gap: 4px; }
+html[data-ui="material"] .nav-links > li { display: flex; align-items: center; }
+
+html[data-ui="material"] .nav-links a:not(.btn):not(.nav-cta) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 22px;
+  color: var(--m-on-bg);
+  font-size: 16px;
+  font-weight: 550;
+  transition: background .25s var(--m-ease), border-radius .35s var(--m-spring);
+}
+html[data-ui="material"] .nav-links a:not(.btn):not(.nav-cta)::after { display: none; }
+html[data-ui="material"] .nav-links a:not(.btn):not(.nav-cta):hover {
+  background: var(--m-s3);
+  color: var(--m-on-bg);
+}
+
+html[data-ui="material"] .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 22px;
+  background: var(--m-sc);
+  color: var(--m-on-sc) !important;
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: .01em;
+  text-transform: none;
+  box-shadow: none;
+  transition: border-radius .35s var(--m-spring), background .25s;
+}
+html[data-ui="material"] .nav-cta:hover {
+  transform: none;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--m-sc) 84%, var(--m-on-sc));
+  box-shadow: none;
+}
+
+html[data-ui="material"] .lang-switcher {
+  gap: 2px;
+  padding: 4px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--m-s2);
+}
+html[data-ui="material"] .lang-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 8px 12px;
+  border-radius: 18px;
+  color: var(--m-var);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background .25s, color .25s, border-radius .35s var(--m-spring);
+}
+html[data-ui="material"] .lang-btn:hover { color: var(--m-on-bg); }
+html[data-ui="material"] .lang-btn.active {
+  background: var(--m-p);
+  color: var(--m-on-p);
+  box-shadow: none;
+}
+
+html[data-ui="material"] .nav-burger {
+  width: 48px;
+  height: 48px;
+  padding: 13px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--m-s3);
+  transition: border-radius .35s var(--m-spring), background .25s;
+}
+html[data-ui="material"] .nav-burger:hover { border-radius: 14px; background: var(--m-s2); }
+html[data-ui="material"] .nav-burger span { background: var(--m-on-bg); border-radius: 2px; }
+
+/* Theme switcher skin (structure lives in main.css) */
+html[data-ui="material"] .theme-switcher {
+  gap: 2px;
+  padding: 4px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--m-s2);
+}
+html[data-ui="material"] .theme-opt {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 8px 14px;
+  border-radius: 18px;
+  color: var(--m-var);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background .25s, color .25s, border-radius .35s var(--m-spring);
+}
+html[data-ui="material"] .theme-opt:hover { background: var(--m-s3); color: var(--m-on-bg); }
+html[data-ui="material"] .theme-opt[aria-pressed="true"] {
+  background: var(--m-p);
+  color: var(--m-on-p);
+  box-shadow: none;
+}
+html[data-ui="material"] .mode-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--m-s3);
+  color: var(--m-on-bg);
+  transition: border-radius .35s var(--m-spring), background .25s;
+}
+html[data-ui="material"] .mode-btn:hover { border-radius: 14px; background: var(--m-s2); }
+html[data-ui="material"] .mode-btn .ic-sun { display: none; }
+html[data-ui="material"][data-mode="dark"] .mode-btn .ic-sun { display: block; }
+html[data-ui="material"][data-mode="dark"] .mode-btn .ic-moon { display: none; }
+
+/* ── Drawer ─────────────────────────────────────────── */
+html[data-ui="material"] .drawer {
+  background: color-mix(in srgb, var(--m-s1) 95%, transparent);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+html[data-ui="material"] .drawer a:not(.btn) {
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: clamp(26px, 7vw, 38px);
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -.02em;
+  color: var(--m-on-bg);
+  padding: 10px;
+}
+html[data-ui="material"] .drawer a:hover { color: var(--m-p); }
+
+/* ── Hero ───────────────────────────────────────────── */
+html[data-ui="material"] .hero {
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  min-height: 100svh;
+  padding: calc(var(--nav-h) + 80px) clamp(20px, 5vw, 72px) 90px;
+}
+html[data-ui="material"] .hero::before { display: none; }
+html[data-ui="material"] .hero-inner {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+html[data-ui="material"] .hero-title {
+  margin: 26px 0 30px;
+  max-width: 14ch;
+  font-size: clamp(52px, 7.6vw, 124px);
+  font-stretch: 120%;
+  letter-spacing: -.035em;
+  line-height: .88;
+}
+html[data-ui="material"] .hero-title span {
+  display: inline-block;
+  animation-name: mRise;
+  animation-duration: 1s;
+  animation-timing-function: var(--m-ease);
+}
+html[data-ui="material"] .hero-title .l1,
+html[data-ui="material"] .hero-title .l2,
+html[data-ui="material"] .hero-title .l3 {
+  text-shadow: none;
+  filter: none;
+}
+html[data-ui="material"] .hero-title .l2 { color: var(--m-p); }
+
+html[data-ui="material"] .hero-sub {
+  max-width: 34em;
+  margin: 0;
+  color: var(--m-var);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.5;
+}
+
+html[data-ui="material"] .hero-actions {
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 38px;
+}
+html[data-ui="material"] .hero-actions .btn {
+  height: 64px;
+  padding: 0 32px;
+  border-radius: 32px;
+  font-size: 18px;
+}
+html[data-ui="material"] .hero-actions .btn:hover { border-radius: 18px; }
+
+html[data-ui="material"] .scroll-hint {
+  color: var(--m-var);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: none;
+}
+html[data-ui="material"] .scroll-hint .mouse {
+  border-color: var(--m-outline);
+  border-radius: 12px;
+}
+html[data-ui="material"] .scroll-hint .mouse::after { background: var(--m-p); }
+
+/* Expressive shape cluster (index hero) */
+html[data-ui="material"] .m-cluster {
+  display: block;
+  position: absolute;
+  z-index: 0;
+  right: clamp(8px, 3vw, 40px);
+  top: 150px;
+  width: min(44vw, 560px);
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+/* The scalloped silhouette is painted on its own background layer:
+   the label above it is never clipped by the polygon. */
+html[data-ui="material"] .m-shape {
+  position: absolute;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  isolation: isolate;
+}
+html[data-ui="material"] .m-shape::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--m-shape-bg, transparent);
+  -webkit-clip-path: var(--m-shape-clip, circle(50%));
+  clip-path: var(--m-shape-clip, circle(50%));
+}
+html[data-ui="material"] .m-shape > span {
+  display: block;
+  padding: 0 14%;
+  line-height: 1;
+}
+html[data-ui="material"] .m-shape b {
+  display: block;
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: clamp(24px, 3vw, 48px);
+  font-weight: 800;
+  font-stretch: 118%;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+html[data-ui="material"] .m-shape small {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(10px, 1vw, 14px);
+  font-weight: 500;
+  font-stretch: 100%;
+  line-height: 1.15;
+  opacity: .85;
+}
+html[data-ui="material"] .m-shape.s-1 { width: 58%; right: 0; top: 0; --m-shape-bg: var(--m-p); color: var(--m-on-p); }
+html[data-ui="material"] .m-shape.s-2 { width: 38%; left: 0; top: 33%; --m-shape-bg: var(--m-tc); color: var(--m-on-tc); }
+html[data-ui="material"] .m-shape.s-3 { width: 33%; right: 4%; bottom: 6%; --m-shape-bg: var(--m-sc); color: var(--m-on-sc); }
+html[data-ui="material"] .m-shape.s-4 { width: 29%; left: 24%; bottom: 0; --m-shape-bg: var(--m-pc); color: var(--m-on-pc); }
+html[data-ui="material"] .m-shape.s-3 b,
+html[data-ui="material"] .m-shape.s-4 b { font-size: clamp(18px, 2.1vw, 32px); }
+html[data-ui="material"] .m-shape.s-3 small,
+html[data-ui="material"] .m-shape.s-4 small { font-size: clamp(10px, .85vw, 12px); }
+
+@keyframes mSpin { to { transform: rotate(360deg); } }
+@keyframes mRise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Marquee → static chip row ──────────────────────── */
+html[data-ui="material"] .marquee {
+  padding: 0;
+  border: 0;
+  background: none;
+  overflow: visible;
+}
+html[data-ui="material"] .marquee-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 72px);
+  animation: none;
+}
+html[data-ui="material"] .marquee-group {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding-right: 0;
+}
+html[data-ui="material"] .marquee-group[aria-hidden="true"] { display: none; }
+html[data-ui="material"] .marquee-track .mi {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: var(--m-s2);
+  color: var(--m-on-bg);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  -webkit-text-stroke: 0;
+  transition: border-radius .3s var(--m-spring), background .25s;
+}
+html[data-ui="material"] .marquee-track .mi:hover {
+  border-radius: 20px;
+  background: var(--m-s3);
+}
+html[data-ui="material"] .marquee-track em { display: none; }
+
+/* ── Sections ───────────────────────────────────────── */
+html[data-ui="material"] .section,
+html[data-ui="material"] .cta-band {
+  max-width: 1240px;
+}
+html[data-ui="material"] .section {
+  padding: clamp(72px, 8vw, 110px) clamp(20px, 5vw, 72px);
+}
+html[data-ui="material"] .section-head { margin-bottom: clamp(36px, 5vw, 56px); }
+html[data-ui="material"] .section-head h2 { margin-top: 18px; font-size: clamp(38px, 6vw, 84px); }
+html[data-ui="material"] .section-head h2::after,
+html[data-ui="material"] .about-text h2::after { display: none; }
+html[data-ui="material"] .section-head p {
+  margin-top: 20px;
+  max-width: 40em;
+  color: var(--m-var);
+  font-size: 18px;
+}
+
+/* ── Stats ──────────────────────────────────────────── */
+html[data-ui="material"] .stats {
+  gap: 12px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+  grid-template-columns: repeat(4, 1fr);
+}
+html[data-ui="material"] .stat {
+  padding: 34px 24px;
+  border-radius: 32px;
+  background: var(--m-s2);
+  backdrop-filter: none;
+  transition: background .3s, border-radius .5s var(--m-spring);
+}
+html[data-ui="material"] .stat:hover { background: var(--m-s3); border-radius: 24px; }
+html[data-ui="material"] .stat b {
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: clamp(34px, 4vw, 54px);
+  font-weight: 850;
+  font-stretch: 120%;
+  letter-spacing: -.03em;
+  color: var(--m-p);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  filter: none;
+  line-height: 1.1;
+}
+html[data-ui="material"] .stat span {
+  margin-top: 6px;
+  color: var(--m-var);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ── Project cards → bento ──────────────────────────── */
+html[data-ui="material"] .projects-grid {
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
+}
+html[data-ui="material"] .project-card {
+  grid-column: span 6;
+  border: 0;
+  border-radius: 56px;
+  background: var(--m-card, var(--m-s2));
+  color: var(--m-card-on, var(--m-on-bg));
+  box-shadow: none;
+  overflow: hidden;
+  transition: border-radius .6s var(--m-spring), background .3s, color .3s;
+}
+html[data-ui="material"] .project-card:nth-child(1) {
+  grid-column: span 7;
+  --m-card: var(--m-pc);
+  --m-card-on: var(--m-on-pc);
+  border-radius: 56px 56px 56px 20px;
+}
+html[data-ui="material"] .project-card:nth-child(2) {
+  grid-column: span 5;
+  --m-card: var(--m-tc);
+  --m-card-on: var(--m-on-tc);
+  border-radius: 20px 56px 56px 56px;
+}
+html[data-ui="material"] .project-card:nth-child(3) {
+  grid-column: span 5;
+  --m-card: var(--m-inv);
+  --m-card-on: var(--m-on-inv);
+  border-radius: 56px 20px 56px 56px;
+}
+html[data-ui="material"] .project-card:nth-child(4) {
+  grid-column: span 7;
+  --m-card: var(--m-sc);
+  --m-card-on: var(--m-on-sc);
+  border-radius: 56px 56px 20px 56px;
+}
+html[data-ui="material"] .project-card:hover {
+  border: 0;
+  border-radius: 28px;
+  box-shadow: none;
+}
+html[data-ui="material"] .project-card::before,
+html[data-ui="material"] .project-card::after { display: none; }
+
+html[data-ui="material"] .project-media {
+  margin: 10px 10px 0;
+  border-radius: 46px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  transition: border-radius .5s var(--m-spring);
+}
+html[data-ui="material"] .project-card:hover .project-media { border-radius: 22px; }
+html[data-ui="material"] .project-media::after { display: none; }
+html[data-ui="material"] .project-media img { filter: none; transform: none; }
+html[data-ui="material"] .project-card:hover .project-media img {
+  filter: none;
+  transform: scale(1.04);
+}
+
+html[data-ui="material"] .project-body { padding: 26px 30px 30px; }
+html[data-ui="material"] .project-body h3 {
+  font-size: clamp(26px, 2.4vw, 34px);
+  letter-spacing: -.02em;
+  line-height: 1.05;
+}
+html[data-ui="material"] .project-body > p {
+  margin-top: 12px;
+  color: inherit;
+  opacity: .82;
+  font-size: 16px;
+}
+html[data-ui="material"] .project-link {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  margin-top: 20px;
+  padding: 0 22px;
+  border-radius: 24px;
+  background: var(--m-card-on, var(--m-on-bg));
+  color: var(--m-card, var(--m-bg));
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: border-radius .35s var(--m-spring), transform .2s;
+}
+html[data-ui="material"] .project-link:hover {
+  color: var(--m-card, var(--m-bg));
+  border-radius: 14px;
+}
+html[data-ui="material"] .project-link svg { transition: transform .25s; }
+html[data-ui="material"] .project-link:hover svg { transform: translateX(4px); }
+
+/* Tilt belongs to the pixel theme */
+html[data-ui="material"] [data-tilt] { transform: none !important; }
+
+/* ── About / studio ─────────────────────────────────── */
+html[data-ui="material"] #about.section {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-radius: 64px;
+  background: var(--m-s1);
+}
+html[data-ui="material"] .about-grid {
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+html[data-ui="material"] .about-text h2 { margin-top: 18px; font-size: clamp(32px, 3.6vw, 54px); }
+html[data-ui="material"] .about-text p {
+  margin-top: 20px;
+  color: var(--m-var);
+  font-size: 18px;
+  max-width: 32em;
+}
+html[data-ui="material"] .about-text .btn { margin-top: 30px; }
+
+/* Values → expressive connected group */
+html[data-ui="material"] .feature-grid {
+  display: flex;
+  gap: 6px;
+  height: 420px;
+}
+html[data-ui="material"] .feature {
+  position: relative;
+  flex: 1;
+  min-width: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 14px;
+  padding: 22px;
+  border: 0;
+  border-radius: 32px;
+  background: var(--m-s3);
+  color: var(--m-on-bg);
+  overflow: hidden;
+  cursor: pointer;
+  transform: none;
+  transition:
+    flex .6s var(--m-spring),
+    min-height .5s var(--m-spring),
+    border-radius .6s var(--m-spring),
+    background .3s,
+    color .3s;
+}
+html[data-ui="material"] .feature::before { display: none; }
+html[data-ui="material"] .feature:hover {
+  transform: none;
+  border-color: transparent;
+  background: var(--m-s2);
+}
+html[data-ui="material"] .feature.on:hover { background: var(--m-p); }
+html[data-ui="material"] .feature .icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: var(--m-bg);
+  box-shadow: none;
+  font-size: 20px;
+  transition: border-radius .5s var(--m-spring), background .3s, color .3s;
+}
+html[data-ui="material"] .feature h4 {
+  margin-top: 0;
+  font-size: 22px;
+  font-stretch: 110%;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+html[data-ui="material"] .feature p {
+  max-width: 22em;
+  max-height: 0;
+  margin-top: 8px;
+  overflow: hidden;
+  opacity: 0;
+  color: inherit;
+  font-size: 15px;
+  transition: opacity .3s, max-height .5s;
+}
+html[data-ui="material"] .feature.on {
+  flex: 4.5;
+  justify-content: space-between;
+  border-radius: 28px;
+  background: var(--m-p);
+  color: var(--m-on-p);
+}
+html[data-ui="material"] .feature.on .icon {
+  border-radius: 14px;
+  background: var(--m-on-p);
+  color: var(--m-p);
+}
+html[data-ui="material"] .feature.on p {
+  max-height: 160px;
+  opacity: .92;
+  transition-delay: .15s;
+}
+html[data-ui="material"] .feature:not(.on) h4 {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  align-self: flex-start;
+}
+
+/* ── CTA band ───────────────────────────────────────── */
+html[data-ui="material"] .cta-card {
+  position: relative;
+  text-align: left;
+  padding: clamp(40px, 7vw, 80px);
+  border: 0;
+  border-radius: 72px 72px 72px 24px;
+  background: var(--m-p);
+  color: var(--m-on-p);
+  overflow: hidden;
+}
+html[data-ui="material"] .cta-card::before { display: none; }
+html[data-ui="material"] .cta-card h2 {
+  margin: 0;
+  max-width: 13ch;
+  color: var(--m-on-p);
+  font-size: clamp(36px, 5.2vw, 74px);
+}
+html[data-ui="material"] .cta-card p {
+  margin: 20px 0 0;
+  max-width: 34em;
+  color: var(--m-on-p);
+  opacity: .85;
+  font-size: 18px;
+}
+html[data-ui="material"] .cta-card .hero-actions {
+  justify-content: flex-start;
+  margin-top: 36px;
+}
+html[data-ui="material"] .cta-card .btn-primary,
+html[data-ui="material"] .cta-card .btn-primary:hover {
+  background: var(--m-on-p);
+  color: var(--m-p);
+}
+html[data-ui="material"] .cta-card .btn-primary:hover {
+  background: color-mix(in srgb, var(--m-on-p) 88%, var(--m-p));
+}
+html[data-ui="material"] .cta-card .btn-ghost,
+html[data-ui="material"] .cta-card .btn-ghost:hover {
+  background: transparent;
+  color: var(--m-on-p);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--m-on-p) 60%, transparent);
+}
+html[data-ui="material"] .cta-card .btn-ghost:hover {
+  background: color-mix(in srgb, var(--m-on-p) 12%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--m-on-p);
+}
+html[data-ui="material"] .m-ornament {
+  display: block;
+  position: absolute;
+  right: -70px;
+  bottom: -70px;
+  width: 300px;
+  aspect-ratio: 1;
+  --m-shape-bg: color-mix(in srgb, var(--m-on-p) 16%, transparent);
+  animation: mSpin 80s linear infinite;
+  pointer-events: none;
+}
+html[data-ui="material"] .m-ornament::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--m-shape-bg);
+  -webkit-clip-path: var(--m-shape-clip, circle(50%));
+  clip-path: var(--m-shape-clip, circle(50%));
+}
+
+/* ── Footer ─────────────────────────────────────────── */
+html[data-ui="material"] .footer {
+  border: 0;
+  background: none;
+  padding: 64px clamp(20px, 5vw, 72px) 120px;
+  color: var(--m-var);
+}
+html[data-ui="material"] .footer-brand p { color: var(--m-var); font-size: 15px; }
+html[data-ui="material"] .socials a {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--m-s2);
+  color: var(--m-on-bg);
+  box-shadow: none;
+  transition: border-radius .35s var(--m-spring), background .25s, color .25s;
+}
+html[data-ui="material"] .socials a:hover {
+  border: 0;
+  border-radius: 50%;
+  background: var(--m-s3);
+  color: var(--m-p);
+  transform: none;
+}
+html[data-ui="material"] .footer-col h5 {
+  margin-bottom: 14px;
+  color: var(--m-on-bg);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+html[data-ui="material"] .footer-col a {
+  color: var(--m-var);
+  font-size: 15px;
+}
+html[data-ui="material"] .footer-col a:hover {
+  color: var(--m-p);
+  padding-left: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html[data-ui="material"] .footer-bottom {
+  border-top-color: color-mix(in srgb, var(--m-outline) 28%, transparent);
+  color: var(--m-var);
+  font-size: 14px;
+}
+html[data-ui="material"] .footer-bottom span:last-child { color: var(--m-p); }
+
+/* ── Wildium page ───────────────────────────────────── */
+html[data-ui="material"] .wildium-stats {
+  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+}
+html[data-ui="material"] .wildium-stat {
+  padding: 34px 24px;
+  border: 0;
+  border-radius: 32px;
+  background: var(--m-s2);
+  transition: background .3s, border-radius .5s var(--m-spring);
+}
+html[data-ui="material"] .wildium-stat:hover {
+  border-color: transparent;
+  border-radius: 24px;
+  background: var(--m-s3);
+  transform: none;
+}
+html[data-ui="material"] .wildium-stat b {
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: clamp(32px, 3.6vw, 50px);
+  font-weight: 850;
+  font-stretch: 118%;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+html[data-ui="material"] .wildium-stat span {
+  margin-top: 6px;
+  color: var(--m-var);
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-ui="material"] .features-grid { gap: 12px; }
+html[data-ui="material"] .feature-card {
+  padding: 30px 28px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--m-s2);
+  box-shadow: none;
+  transition: background .3s, border-radius .5s var(--m-spring);
+}
+html[data-ui="material"] .feature-card::after { display: none; }
+html[data-ui="material"] .feature-card:hover {
+  border-color: transparent;
+  background: var(--m-s3);
+  border-radius: 28px;
+  box-shadow: none;
+  transform: none;
+}
+html[data-ui="material"] .feature-card .icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--m-s1);
+  box-shadow: none;
+  font-size: 24px;
+}
+html[data-ui="material"] .feature-card h3 {
+  margin-top: 20px;
+  font-size: 24px;
+  letter-spacing: -.015em;
+  line-height: 1.1;
+}
+html[data-ui="material"] .feature-card p {
+  margin-top: 10px;
+  color: var(--m-var);
+  font-size: 16px;
+}
+
+html[data-ui="material"] .gameplay-grid { gap: 12px; }
+html[data-ui="material"] .gameplay-step {
+  padding: 32px 28px 30px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--m-s2);
+  transition: background .3s, border-radius .5s var(--m-spring);
+}
+html[data-ui="material"] .gameplay-step:hover {
+  border-color: transparent;
+  background: var(--m-s3);
+  border-radius: 28px;
+  transform: none;
+}
+html[data-ui="material"] .gameplay-step .num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--m-p);
+  color: var(--m-on-p);
+  box-shadow: none;
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  transition: border-radius .5s var(--m-spring);
+}
+html[data-ui="material"] .gameplay-step:hover .num { border-radius: 14px; }
+html[data-ui="material"] .gameplay-step h3 {
+  margin-top: 22px;
+  font-size: 24px;
+  letter-spacing: -.015em;
+  line-height: 1.1;
+}
+html[data-ui="material"] .gameplay-step p {
+  margin-top: 10px;
+  color: var(--m-var);
+  font-size: 16px;
+}
+
+html[data-ui="material"] .join-card {
+  max-width: 860px;
+  text-align: left;
+  padding: clamp(40px, 7vw, 76px);
+  border: 0;
+  border-radius: 72px 72px 72px 24px;
+  background: var(--m-p);
+  color: var(--m-on-p);
+  overflow: hidden;
+}
+html[data-ui="material"] .join-card::before { display: none; }
+html[data-ui="material"] .join-card:hover {
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+html[data-ui="material"] .join-card .eyebrow {
+  background: color-mix(in srgb, var(--m-on-p) 16%, transparent);
+  color: var(--m-on-p);
+}
+html[data-ui="material"] .join-card h2 {
+  margin-top: 18px;
+  color: var(--m-on-p);
+  font-size: clamp(34px, 5vw, 64px);
+}
+html[data-ui="material"] .join-card > p {
+  margin-top: 18px;
+  max-width: 34em;
+  color: var(--m-on-p);
+  opacity: .85;
+  font-size: 18px;
+}
+html[data-ui="material"] .join-ip {
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 32px;
+  padding: 10px 10px 10px 24px;
+  border: 0;
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--m-on-p) 14%, transparent);
+}
+html[data-ui="material"] .join-ip code {
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  color: var(--m-on-p);
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+html[data-ui="material"] .join-ip .btn-primary,
+html[data-ui="material"] .join-ip .btn-primary:hover {
+  background: var(--m-on-p);
+  color: var(--m-p);
+}
+html[data-ui="material"] .join-ip .btn-primary:hover {
+  background: color-mix(in srgb, var(--m-on-p) 88%, var(--m-p));
+}
+html[data-ui="material"] .join-note {
+  margin-top: 18px;
+  color: var(--m-on-p);
+  font-size: 14px;
+  opacity: .75;
+}
+
+/* ── Legal page ─────────────────────────────────────── */
+html[data-ui="material"] .legal {
+  max-width: 900px;
+  padding: calc(var(--nav-h) + 80px) clamp(20px, 5vw, 56px) 100px;
+}
+html[data-ui="material"] .legal h1 {
+  margin-top: 18px;
+  font-size: clamp(40px, 7vw, 80px);
+  font-stretch: 115%;
+  line-height: .95;
+  letter-spacing: -.03em;
+}
+html[data-ui="material"] .legal .updated {
+  margin-top: 14px;
+  color: var(--m-var);
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+html[data-ui="material"] .legal article {
+  margin-top: 40px;
+  padding: clamp(28px, 5vw, 56px);
+  border: 0;
+  border-radius: 56px 56px 56px 20px;
+  background: var(--m-s1);
+}
+html[data-ui="material"] .legal h2 {
+  margin: 34px 0 10px;
+  color: var(--m-p);
+  font-family: "Roboto Flex", system-ui, sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  text-transform: none;
+}
+html[data-ui="material"] .legal p { color: var(--m-var); font-size: 16px; }
+html[data-ui="material"] .legal a {
+  color: var(--m-p);
+  text-decoration-color: color-mix(in srgb, var(--m-p) 45%, transparent);
+}
+html[data-ui="material"] .legal a:hover { color: var(--m-t); }
+
+/* ── Ripple (state layer) ───────────────────────────── */
+html[data-ui="material"] .m-ripple {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .2;
+  transform: scale(0);
+  animation: mRipple .6s var(--m-ease) forwards;
+  pointer-events: none;
+}
+@keyframes mRipple {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 1150px) {
+  /* Keep the floating bar on one line before the drawer takes over */
+  html[data-ui="material"] .nav { padding-left: 16px; }
+  html[data-ui="material"] .nav-links a:not(.btn):not(.nav-cta) { padding: 0 12px; font-size: 15px; }
+  html[data-ui="material"] .nav-cta { padding: 0 14px; font-size: 14px !important; }
+  html[data-ui="material"] .theme-opt { padding: 8px 10px; font-size: 13px; }
+  html[data-ui="material"] .mode-btn { width: 40px; height: 40px; }
+}
+
+@media (max-width: 1100px) {
+  html[data-ui="material"] .m-cluster { display: none; }
+}
+
+@media (max-width: 1020px) {
+  html[data-ui="material"] .projects-grid { grid-template-columns: 1fr 1fr; }
+  html[data-ui="material"] .project-card,
+  html[data-ui="material"] .project-card:nth-child(n),
+  html[data-ui="material"] .project-card:hover {
+    grid-column: auto;
+    border-radius: 40px;
+  }
+}
+
+@media (max-width: 980px) {
+  html[data-ui="material"] .hero-title { max-width: none; }
+}
+
+@media (max-width: 900px) {
+  html[data-ui="material"] .feature-grid {
+    flex-direction: column;
+    height: auto;
+  }
+  html[data-ui="material"] .feature {
+    flex: none;
+    min-height: 84px;
+    justify-content: flex-start;
+  }
+  html[data-ui="material"] .feature.on { min-height: 210px; flex: none; }
+  html[data-ui="material"] .feature:not(.on) h4 {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  html[data-ui="material"] .feature:not(.on) p { display: none; }
+  html[data-ui="material"] .about-grid { grid-template-columns: 1fr; }
+  html[data-ui="material"] #about.section { border-radius: 40px; }
+}
+
+@media (max-width: 680px) {
+  html[data-ui="material"] .stats,
+  html[data-ui="material"] .wildium-stats { grid-template-columns: 1fr 1fr; }
+  html[data-ui="material"] .projects-grid { grid-template-columns: 1fr; }
+  html[data-ui="material"] .project-card,
+  html[data-ui="material"] .project-card:nth-child(n),
+  html[data-ui="material"] .project-card:hover { border-radius: 36px; }
+  html[data-ui="material"] .project-media { border-radius: 30px; }
+  html[data-ui="material"] .project-card:hover .project-media { border-radius: 22px; }
+  html[data-ui="material"] .cta-card,
+  html[data-ui="material"] .join-card { border-radius: 44px 44px 44px 18px; }
+  html[data-ui="material"] .join-ip { padding: 14px; border-radius: 26px; }
+  html[data-ui="material"] .join-ip .btn { width: 100%; }
+  html[data-ui="material"] .hero { padding-top: calc(var(--nav-h) + 58px); }
+  html[data-ui="material"] .hero-actions .btn { width: 100%; }
+  html[data-ui="material"] .legal article { border-radius: 36px; }
+}

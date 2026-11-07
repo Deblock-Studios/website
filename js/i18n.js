@@ -16,6 +16,11 @@ const TRANSLATIONS = {
     "nav.blog": "Blog",
 
     /* ── Hero ── */
+    /* ── Theme ── */
+    "theme.group": "Thème du site",
+    "theme.material": "Material",
+    "theme.classic": "Classique",
+
     "hero.eyebrow": "Studio indépendant — jeux & web",
     "hero.title.line1": "On forge",
     "hero.title.line2": "des mondes",
@@ -73,7 +78,7 @@ const TRANSLATIONS = {
     "project.wld.pill4": "Arène",
 
     "project.dc.name": "DeblockCord",
-    "project.dc.desc": "L'alternative de discord mais version Deblock"
+    "project.dc.desc": "L'alternative de discord mais version Deblock",
 
     "project.link": "Explorer le projet",
 
@@ -184,6 +189,11 @@ const TRANSLATIONS = {
     "nav.blog": "Blog",
 
     /* ── Hero ── */
+    /* ── Theme ── */
+    "theme.group": "Site theme",
+    "theme.material": "Material",
+    "theme.classic": "Classic",
+
     "hero.eyebrow": "Independent studio — games & web",
     "hero.title.line1": "We forge",
     "hero.title.line2": "worlds",
@@ -350,6 +360,7 @@ const i18n = {
   init() {
     const saved = localStorage.getItem('ds-lang') || 'fr';
     this.setLang(saved, true);
+    if (typeof window.onLangChange === 'function') window.onLangChange();
   },
 
   setLang(lang, silent = false) {

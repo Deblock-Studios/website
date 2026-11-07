@@ -1192,3 +1192,74 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   }
   html { scroll-behavior: auto; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   Theme switcher (structure shared by both themes)
+   The Material skin lives in css/material.css
+   ═══════════════════════════════════════════════════════ */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 6px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.theme-opt {
+  padding: 5px 9px;
+  border-radius: 5px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  transition: color .2s, background .2s;
+}
+.theme-opt:hover { color: var(--text); }
+.theme-opt[aria-pressed="true"] {
+  color: #1c0d02;
+  background: var(--grad);
+  box-shadow: inset -2px -2px 0 var(--bevel-dark), inset 2px 2px 0 var(--bevel-light);
+}
+
+.mode-switch { display: flex; align-items: center; }
+.mode-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  transition: color .2s, border-color .2s;
+}
+.mode-btn:hover { color: var(--text); border-color: var(--border-2); }
+.mode-btn svg { width: 18px; height: 18px; }
+.mode-btn .ic-moon { fill: currentColor; stroke: none; }
+.mode-btn .ic-sun { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* The switcher only works with JS: hide it instead of shipping dead buttons */
+html:not([data-ui]) .theme-switcher,
+html:not([data-ui]) .mode-switch { display: none; }
+
+/* Material-only decorations, hidden in the classic theme */
+.m-cluster,
+.m-ornament { display: none; }
+
+/* Compact navbar before the mobile drawer kicks in */
+@media (max-width: 1150px) and (min-width: 901px) {
+  .nav-links { gap: 22px; }
+  .theme-opt { padding: 4px 7px; font-size: .66rem; }
+}

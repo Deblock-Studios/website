@@ -3,15 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    /* Apply the saved theme before first paint to avoid a flash */
+    (function () {
+      try {
+        var root = document.documentElement;
+        var ui = localStorage.getItem('ds-ui') === 'classic' ? 'classic' : 'material';
+        var mode = localStorage.getItem('ds-mode');
+        if (mode !== 'dark' && mode !== 'light') {
+          mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        root.setAttribute('data-ui', ui);
+        root.setAttribute('data-mode', mode);
+      } catch (e) {
+        document.documentElement.setAttribute('data-ui', 'material');
+        document.documentElement.setAttribute('data-mode', 'light');
+      }
+    })();
+  </script>
   <meta name="description" content="Mentions légales de Deblock Studios — informations sur le studio, l'hébergement et le contact." />
   <title>Deblock Studios — Mentions légales</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/material.css" />
 </head>
 <body>
 
@@ -28,6 +47,16 @@
       <li><a href="/#about">Studio</a></li>
       <li><a href="/#footer">Contact</a></li>
       <li><a href="https://blog-deblock-studios.vercel.app">Blog</a></li>
+      <li class="theme-switcher" data-theme-group role="group" aria-label="Thème du site">
+        <button type="button" class="theme-opt" data-ui-choice="material" aria-pressed="true">Material</button>
+        <button type="button" class="theme-opt" data-ui-choice="classic" aria-pressed="false">Classique</button>
+      </li>
+      <li class="mode-switch">
+        <button type="button" class="mode-btn" data-mode-toggle aria-pressed="false" aria-label="Activer le mode sombre">
+          <svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.4A5.5 5.5 0 0 1 13.4 3.1 9 9 0 0 0 12 3z"/></svg>
+          <svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.3M12 19.3v2.3M2.4 12h2.3M19.3 12h2.3M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+        </button>
+      </li>
     </ul>
 
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
@@ -41,6 +70,16 @@
     <a href="/#about">Studio</a>
     <a href="/#footer">Contact</a>
     <a href="https://blog-deblock-studios.vercel.app">Blog</a>
+    <div class="nav-controls">
+      <div class="theme-switcher" data-theme-group role="group" aria-label="Thème du site">
+        <button type="button" class="theme-opt" data-ui-choice="material" aria-pressed="true">Material</button>
+        <button type="button" class="theme-opt" data-ui-choice="classic" aria-pressed="false">Classique</button>
+      </div>
+      <button type="button" class="mode-btn" data-mode-toggle aria-pressed="false" aria-label="Activer le mode sombre">
+        <svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.4A5.5 5.5 0 0 1 13.4 3.1 9 9 0 0 0 12 3z"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.3M12 19.3v2.3M2.4 12h2.3M19.3 12h2.3M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+      </button>
+    </div>
   </div>
 
   <!-- LEGAL -->
@@ -124,6 +163,7 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/theme.js"></script>
   <script>i18n.init();</script>
 </body>
 </html>

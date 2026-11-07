@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deblock Studios — On forge des mondes</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5FBEF;--on-bg:#171D16;--var:#424940;--outline:#72796F;
+  --p:#2B6A3A;--on-p:#fff;--pc:#B2F2B6;--on-pc:#00210B;
+  --sc:#D5E8D2;--on-sc:#101F12;
+  --tc:#FFDCC0;--on-tc:#2C1600;--t:#8A4F10;
+  --s1:#EBF2E5;--s2:#E3EBDD;--s3:#DCE5D6;
+  --inv:#2B322A;--on-inv:#ECF3E5;
+  --spring:cubic-bezier(.34,1.56,.64,1);--ease:cubic-bezier(.2,0,0,1);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10150F;--on-bg:#E0E6D9;--var:#C1C9BE;--outline:#8B9389;
+  --p:#97D59B;--on-p:#00391A;--pc:#0E5128;--on-pc:#B2F2B6;
+  --sc:#3A4B3A;--on-sc:#D5E8D2;
+  --tc:#6A3A00;--on-tc:#FFDCC0;--t:#FFB77A;
+  --s1:#181E17;--s2:#1D241C;--s3:#262E25;
+  --inv:#E0E6D9;--on-inv:#2B322A;}}
+:root[data-theme="dark"]{
+  --bg:#10150F;--on-bg:#E0E6D9;--var:#C1C9BE;--outline:#8B9389;
+  --p:#97D59B;--on-p:#00391A;--pc:#0E5128;--on-pc:#B2F2B6;
+  --sc:#3A4B3A;--on-sc:#D5E8D2;
+  --tc:#6A3A00;--on-tc:#FFDCC0;--t:#FFB77A;
+  --s1:#181E17;--s2:#1D241C;--s3:#262E25;
+  --inv:#E0E6D9;--on-inv:#2B322A;}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:96px;height:auto}
+body{background:var(--bg);color:var(--on-bg);font-family:"Roboto Flex",system-ui,sans-serif;font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--p);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+/* state layer + ripple */
+.sl{position:relative;overflow:hidden;isolation:isolate}
+.sl::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .2s;z-index:-1}
+.sl:hover::before{opacity:.08}.sl:active::before{opacity:.12}
+.rp{position:absolute;border-radius:50%;background:currentColor;opacity:.2;transform:scale(0);animation:rp .6s var(--ease) forwards;pointer-events:none;z-index:-1}
+@keyframes rp{to{transform:scale(1);opacity:0}}
+
+/* buttons: shape morph pill -> squircle on press */
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border:0;border-radius:28px;font:600 17px/1 "Roboto Flex";letter-spacing:.01em;cursor:pointer;transition:border-radius .35s var(--spring),transform .35s var(--spring)}
+.btn:hover{border-radius:16px}.btn:active{border-radius:12px;transform:scale(.96)}
+.btn.fill{background:var(--p);color:var(--on-p)}
+.btn.tonal{background:var(--sc);color:var(--on-sc)}
+.btn.ghost{box-shadow:inset 0 0 0 1.5px var(--outline);color:var(--p)}
+.btn.xl{height:72px;padding:0 36px;font-size:20px;border-radius:36px}
+.btn svg,.ib svg{width:22px;height:22px;fill:currentColor}
+.ib{width:48px;height:48px;border:0;border-radius:50%;background:var(--s3);color:var(--on-bg);display:grid;place-items:center;cursor:pointer;transition:border-radius .35s var(--spring)}
+.ib:hover{border-radius:14px}
+
+/* floating nav */
+header{position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 14px);left:0;right:0;pointer-events:none}
+.bar{pointer-events:auto;margin:0 auto;max-width:1240px;width:calc(100% - clamp(32px,8vw,80px));display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 22px;border-radius:32px;background:color-mix(in srgb,var(--s2) 82%,transparent);backdrop-filter:blur(18px)}
+.logo{font-weight:900;font-stretch:130%;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.logo i{width:26px;height:26px;background:var(--p);border-radius:8px;transform:rotate(12deg);transition:border-radius .5s var(--spring),transform .5s var(--spring)}
+.logo:hover i{border-radius:50%;transform:rotate(180deg)}
+nav{display:flex;gap:4px}
+nav a{height:44px;padding:0 20px;display:grid;place-items:center;border-radius:22px;font-weight:550;transition:background .25s,border-radius .35s var(--spring)}
+nav a:hover{background:var(--s3)}
+nav a.on{background:var(--pc);color:var(--on-pc);border-radius:14px}
+.right{display:flex;gap:8px;align-items:center}
+@media (max-width:760px){
+  nav{position:fixed;pointer-events:auto;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);transform:translateX(-50%);background:var(--inv);color:var(--on-inv);padding:8px;border-radius:32px;gap:2px;box-shadow:0 10px 30px #0004}
+  nav a{padding:0 16px;font-size:15px}nav a:hover{background:#ffffff18}
+  nav a.on{background:var(--p);color:var(--on-p)}
+  .bar .hide-m{display:none}
+}
+
+/* hero */
+.hero{padding:150px 0 64px;position:relative}
+.hero h1{font-size:clamp(52px,10.5vw,168px);line-height:.88;letter-spacing:-.035em;font-stretch:120%;font-weight:850;max-width:12ch;animation:flex 1.6s var(--ease) both}
+@keyframes flex{from{font-weight:200;font-stretch:30%;letter-spacing:.02em;opacity:0}to{font-weight:850;font-stretch:120%;letter-spacing:-.035em;opacity:1}}
+.hero h1 em{font-style:normal;color:var(--p)}
+.lead{max-width:34em;margin:36px 0;font-size:clamp(18px,2vw,22px);color:var(--var)}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.cluster{position:absolute;right:0;top:130px;width:min(46vw,560px);aspect-ratio:1;pointer-events:none}
+.shape{position:absolute;display:grid;place-items:center;text-align:center;font-weight:800;font-stretch:115%;animation:spin 40s linear infinite;pointer-events:auto}
+.shape span{display:block;animation:spin 40s linear infinite reverse;line-height:1}
+.shape b{display:block;font-size:clamp(28px,5vw,64px);letter-spacing:-.03em}
+.shape small{font-size:clamp(11px,1.3vw,15px);font-weight:500;font-stretch:100%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.s1{width:58%;aspect-ratio:1;right:0;top:0;background:var(--p);color:var(--on-p)}
+.s2{width:40%;aspect-ratio:1;left:2%;top:34%;background:var(--tc);color:var(--on-tc);animation-direction:reverse}
+.s2 span{animation-direction:normal}
+.s3{width:34%;aspect-ratio:1;right:8%;bottom:4%;background:var(--sc);color:var(--on-sc)}
+.s4{width:26%;aspect-ratio:1;left:30%;bottom:0;background:var(--pc);color:var(--on-pc);animation-duration:25s}
+.s4 span{animation-duration:25s}
+@media (max-width:980px){.cluster{position:relative;width:100%;max-width:520px;top:0;margin:48px auto 0}.hero h1{max-width:none}.hero{padding-top:120px}}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:56px}
+.chip{height:40px;padding:0 18px;border-radius:12px;background:var(--s2);display:flex;align-items:center;font-size:15px;font-weight:500;transition:border-radius .3s var(--spring)}
+.chip:hover{border-radius:20px;background:var(--s3)}
+
+/* sections */
+section{padding:88px 0}
+h2{font-size:clamp(38px,6.4vw,92px);line-height:.95;font-stretch:115%;font-weight:800;letter-spacing:-.03em;max-width:14ch}
+.sub{color:var(--var);max-width:36em;margin-top:20px}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:48px}
+.card{position:relative;grid-column:span 6;min-height:380px;padding:32px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;overflow:hidden;border-radius:56px 56px 56px 20px;transition:border-radius .6s var(--spring)}
+.card:hover{border-radius:20px 56px 56px 56px}
+.card.a{grid-column:span 7;background:var(--pc);color:var(--on-pc)}
+.card.b{grid-column:span 5;background:var(--tc);color:var(--on-tc);border-radius:20px 56px 56px 56px}
+.card.b:hover{border-radius:56px 20px 56px 56px}
+.card.c{grid-column:span 5;background:var(--inv);color:var(--on-inv);border-radius:56px 20px 56px 56px}
+.card.c:hover{border-radius:56px 56px 20px 56px}
+.card.d{grid-column:span 7;background:var(--sc);color:var(--on-sc);border-radius:56px 56px 20px 56px}
+.card.d:hover{border-radius:20px 56px 56px 20px}
+.card h3{font-size:clamp(30px,3.6vw,48px);line-height:1;font-stretch:110%;font-weight:800;letter-spacing:-.02em}
+.card p{max-width:30em;opacity:.85}
+.card .btn{align-self:flex-start;margin-top:8px;background:currentColor}
+.card .btn b{color:var(--cb);font-weight:600}
+.card .glyph{position:absolute;right:-30px;top:-30px;width:190px;aspect-ratio:1;display:grid;place-items:center;font-size:76px;font-weight:900;font-stretch:130%;background:#ffffff40;transition:transform .8s var(--spring)}
+.card:hover .glyph{transform:rotate(60deg) scale(1.12)}
+.card .glyph span{animation:none;transition:transform .8s var(--spring)}.card:hover .glyph span{transform:rotate(-60deg)}
+.a{--cb:var(--pc)}.b{--cb:var(--tc)}.c{--cb:var(--inv)}.d{--cb:var(--sc)}
+.tag{align-self:flex-start;height:32px;padding:0 14px;border-radius:10px;background:#00000014;font-size:14px;font-weight:600;display:flex;align-items:center}
+@media (max-width:860px){.card,.card.a,.card.b,.card.c,.card.d{grid-column:span 12;min-height:320px}}
+
+/* values: expressive connected button group */
+.studio{background:var(--s1);border-radius:64px;margin:0 clamp(8px,2vw,24px)}
+.studio .grid{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:start}
+.manifest{font-size:clamp(20px,2.2vw,26px);line-height:1.4;color:var(--var);margin:28px 0}
+.group{display:flex;gap:6px;height:420px}
+.val{flex:1;min-width:84px;border:0;text-align:left;font:inherit;padding:22px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:flex .6s var(--spring),border-radius .6s var(--spring),background .3s;border-radius:32px;background:var(--s3);color:var(--on-bg)}
+.val .n{width:44px;height:44px;flex:none;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:800;color:var(--p)}
+.val h4{font-size:24px;font-weight:750;font-stretch:110%;line-height:1.05;white-space:nowrap}
+.val p{font-size:15px;max-height:0;opacity:0;transition:opacity .3s,max-height .5s;max-width:22em;margin-top:8px}
+.val.on{flex:4.5;background:var(--p);color:var(--on-p);border-radius:28px}
+.val.on .n{background:var(--on-p);color:var(--p);border-radius:14px}
+.val.on p{opacity:.92;max-height:120px;transition-delay:.15s}
+.val:not(.on) h4{writing-mode:vertical-rl;transform:rotate(180deg);align-self:flex-start}
+@media (max-width:900px){.studio .grid{grid-template-columns:1fr;gap:32px}.group{flex-direction:column;height:auto}.val{min-height:84px;flex:none;transition:min-height .5s var(--spring),background .3s,border-radius .5s var(--spring)}.val.on{min-height:210px}.val:not(.on) h4{writing-mode:horizontal-tb;transform:none}}
+
+/* contact */
+.contact{margin:24px auto 0;padding:clamp(32px,6vw,80px);border-radius:72px 72px 72px 24px;background:var(--p);color:var(--on-p);position:relative;overflow:hidden}
+.contact h2{max-width:11ch}
+.contact .btn.fill{background:var(--on-p);color:var(--p)}
+.contact .btn.ghost{color:var(--on-p);box-shadow:inset 0 0 0 1.5px #ffffff80}
+.contact .cta{margin-top:40px}
+.contact .shape{width:280px;aspect-ratio:1;right:-60px;bottom:-60px;background:#ffffff24;animation-duration:60s;pointer-events:none}
+footer{padding:64px 0 140px;color:var(--var);font-size:15px}
+footer .f{display:flex;flex-wrap:wrap;gap:24px 56px;justify-content:space-between}
+footer a:hover{color:var(--p);text-decoration:underline}
+footer ul{list-style:none;padding:0;display:grid;gap:8px;margin-top:10px}
+footer h5{font-size:15px;font-weight:700;color:var(--on-bg)}
+.legal{margin-top:40px;font-size:14px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="#top"><i></i>Deblock</a>
+    <nav aria-label="Navigation principale">
+      <a class="sl on" href="#top">Accueil</a>
+      <a class="sl" href="#projects">Projets</a>
+      <a class="sl" href="#about">Studio</a>
+      <a class="sl" href="#contact">Contact</a>
+    </nav>
+    <div class="right">
+      <a class="btn tonal sl hide-m" style="height:48px;padding:0 22px" href="https://blog-deblock-studios.vercel.app">Blog</a>
+      <button class="ib" id="theme" aria-label="Changer de thème"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.4A5.5 5.5 0 0 1 13.400 3.100 9 9 0 0 0 12 3z"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <h1>On forge des mondes qui <em>restent.</em></h1>
+  <p class="lead">Un collectif indépendant de joueurs qui crée des sites, des serveurs Luanti et des outils pour la communauté. Gratuits, rapides, sans publicité.</p>
+  <div class="cta">
+    <a class="btn fill xl sl" href="#projects">Explorer les créations</a>
+    <a class="btn tonal xl sl" href="#about">Découvrir le studio</a>
+  </div>
+  <div class="cluster" aria-label="Chiffres clés">
+    <div class="shape s1" data-n="9" data-a=".07"><span><b>3</b><small>projets actifs</small></span></div>
+    <div class="shape s2" data-n="12" data-a=".06"><span><b>0 €</b><small>de publicité</small></span></div>
+    <div class="shape s3" data-n="6" data-a=".09"><span><b>24/7</b><small>en ligne</small></span></div>
+    <div class="shape s4" data-n="5" data-a=".1"><span><b>100%</b><small>gratuit</small></span></div>
+  </div>
+  <div class="chips">
+    <span class="chip">Sites web</span><span class="chip">Serveurs Luanti</span><span class="chip">Mods</span><span class="chip">PvP Faction</span><span class="chip">Sans tracking</span>
+  </div>
+</div></div>
+
+<section id="projects"><div class="wrap">
+  <h2>Nos créations</h2>
+  <p class="sub">Chaque projet est gratuit, ouvert et pensé pour la communauté. Rien à payer, rien à installer, rien à cacher.</p>
+  <div class="bento">
+    <article class="card a"><div class="glyph shape" data-n="8" data-a=".08" style="animation:none"><span>M</span></div>
+      <span class="tag">Portail</span><h3>MultiCraft Info</h3>
+      <p>Le portail de référence de l’écosystème MultiCraft : listes de serveurs, avis de joueurs, actualités et communauté.</p>
+      <a class="btn sl" href="https://multicraft-info.netlify.app"><b>Explorer le projet</b></a></article>
+    <article class="card b"><div class="glyph shape" data-n="12" data-a=".06" style="animation:none"><span>DB</span></div>
+      <span class="tag">Bibliothèque</span><h3>MultiDB</h3>
+      <p>La bibliothèque communautaire de mods et de packs de texture. Téléchargez, testez, partagez, sans compte.</p>
+      <a class="btn sl" href="https://multidb.vercel.app"><b>Explorer le projet</b></a></article>
+    <article class="card c"><div class="glyph shape" data-n="5" data-a=".1" style="animation:none"><span>W</span></div>
+      <span class="tag">Serveur Luanti</span><h3>Wildium</h3>
+      <p>Le serveur PvP Faction où seuls les stratèges survivent. Alliances, raids et batailles dans un monde en guerre permanente.</p>
+      <a class="btn sl" href="https://deblock-studios.vercel.app/wildium.html"><b>Rejoindre le serveur</b></a></article>
+    <article class="card d"><div class="glyph shape" data-n="7" data-a=".09" style="animation:none"><span>DC</span></div>
+      <span class="tag">Messagerie</span><h3>DeblockCord</h3>
+      <p>L’alternative à Discord, version Deblock : discuter avec sa communauté, sans pub et sans pistage.</p>
+      <a class="btn sl" href="https://deblockcord.netlify.app/"><b>Explorer le projet</b></a></article>
+  </div>
+</div></section>
+
+<section id="about" class="studio"><div class="wrap"><div class="grid">
+  <div>
+    <h2>Pas une entreprise. Une bande de joueurs.</h2>
+    <p class="manifest">Notre mission : créer des outils et des serveurs de qualité. Pas d’outils inutilisables, pas de tracking avancé.</p>
+    <a class="btn fill sl" href="#projects">Voir toutes nos créations</a>
+  </div>
+  <div class="group" role="tablist">
+    <button class="val on sl" role="tab"><span class="n">1</span><div><h4>Joueurs d’abord</h4><p>Chaque ligne de code part d’une vraie envie de joueur, pas d’un business plan.</p></div></button>
+    <button class="val sl" role="tab"><span class="n">2</span><div><h4>100% gratuit</h4><p>Pas de publicité, pas de données revendues, pas d’abonnement caché.</p></div></button>
+    <button class="val sl" role="tab"><span class="n">3</span><div><h4>Fait pour durer</h4><p>Des bases propres, une communauté active, des projets qui évoluent.</p></div></button>
+    <button class="val sl" role="tab"><span class="n">4</span><div><h4>Sans tracking</h4><p>Des sites et des serveurs clairs, sans collecte avancée de données.</p></div></button>
+  </div>
+</div></div></section>
+
+<section id="contact" style="padding-bottom:0"><div class="wrap">
+  <div class="contact">
+    <div class="shape" data-n="8" data-a=".08"></div>
+    <h2>Une idée ? Un serveur à lancer ?</h2>
+    <p class="sub" style="color:inherit;opacity:.85">On est toujours partants pour un nouveau défi. Écrivez-nous, on en discute autour d’un bon vieux pixel.</p>
+    <div class="cta">
+      <a class="btn fill xl sl" href="mailto:deblock-studios@proton.me">Nous écrire</a>
+      <a class="btn ghost xl sl" href="https://github.com/Deblock-Studios">Voir le GitHub</a>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="f">
+    <div style="max-width:26em"><a class="logo" href="#top" style="color:var(--on-bg)"><i></i>Deblock</a><p style="margin-top:14px">Collectif indépendant qui forge des sites, des serveurs et des outils de jeu pour la communauté.</p></div>
+    <div><h5>Projets</h5><ul><li><a href="https://multicraft-info.netlify.app">MultiCraft Info</a></li><li><a href="https://multidb.vercel.app">MultiDB</a></li><li><a href="https://deblock-studios.vercel.app/wildium.html">Wildium</a></li></ul></div>
+    <div><h5>Studio</h5><ul><li><a href="#about">À propos</a></li><li><a href="https://blog-deblock-studios.vercel.app">Blog</a></li><li><a href="https://github.com/Deblock-Studios">GitHub</a></li><li><a href="https://deblock-studios.vercel.app/legal.html">Mentions légales</a></li></ul></div>
+  </div>
+  <p class="legal">© 2026 Deblock Studios. Fait avec passion, sans publicité.</p>
+</div></footer>
+
+<script>
+// Cookie / scallop shapes (M3 Expressive shape library)
+document.querySelectorAll('.shape[data-n]').forEach(el=>{
+  const n=+el.dataset.n,a=+el.dataset.a,p=[];
+  for(let i=0;i<180;i++){const t=i/180*Math.PI*2,r=.5*(1-a)+.5*a*Math.cos(n*t)+.0;
+    p.push((50+Math.cos(t)*(r*2*50/ (1)) *1).toFixed(2)+'% '+(50+Math.sin(t)*(r*2*50)).toFixed(2)+'%');}
+  el.style.clipPath='polygon('+p.join(',')+')';
+});
+// Expressive value group
+const vals=[...document.querySelectorAll('.val')];
+vals.forEach(v=>v.addEventListener('click',()=>{vals.forEach(x=>x.classList.toggle('on',x===v));}));
+// Ripple
+document.addEventListener('pointerdown',e=>{
+  const t=e.target.closest('.sl');if(!t)return;
+  const r=t.getBoundingClientRect(),s=Math.max(r.width,r.height)*2,d=document.createElement('span');
+  d.className='rp';d.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;
+  t.appendChild(d);setTimeout(()=>d.remove(),650);
+});
+// Active nav
+const links=[...document.querySelectorAll('nav a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id));}}),{rootMargin:'-45% 0px -50% 0px'});
+['top','projects','about','contact'].forEach(id=>io.observe(document.getElementById(id)));
+// Theme
+document.getElementById('theme').onclick=()=>{
+  const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  r.dataset.theme=dark?'light':'dark';
+};
+</script>
+</body>
+</html>
